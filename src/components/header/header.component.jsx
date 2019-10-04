@@ -22,6 +22,8 @@ const Header = ({ currentUser, hidden }) => (
       <Link className="option" to="/shop">
         CONTACT
       </Link>
+      {/* conditionally renders Signout if the user is signed in or
+       sign in if there is no user */}
       {currentUser ? (
         <div className="option" onClick={() => auth.signOut()}>
           SIGN OUT
@@ -39,9 +41,10 @@ const Header = ({ currentUser, hidden }) => (
 );
 
 // destructing nested values from the state
-const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
-  currentUser,
-  hidden
+// { user: { currentUser }, cart: { hidden } }
+const mapStateToProps = ({ user, cart }) => ({
+  currentUser: user.currentUser,
+  hidden: cart.hidden
 });
 
 export default connect(mapStateToProps)(Header);
